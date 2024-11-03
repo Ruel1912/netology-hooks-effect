@@ -25,20 +25,19 @@ function App() {
     setActiveUser(user)
   }
 
+  if (loading) {
+    return <Loading />
+  }
+
   return (
-    <>
-      {loading && <Loading />}
-      {!loading && users.length ? (
-        <div className="w-full flex justify-center gap-10">
-          <List
-            users={users}
-            activeUser={activeUser}
-            changeActiveUser={handleUserClick}
-          />
-          {activeUser && <Details info={activeUser} />}
-        </div>
-      ) : null}
-    </>
+    <div className="w-full flex justify-center gap-10">
+      <List
+        users={users}
+        activeUser={activeUser}
+        changeActiveUser={handleUserClick}
+      />
+      {activeUser && <Details info={activeUser} />}
+    </div>
   )
 }
 
