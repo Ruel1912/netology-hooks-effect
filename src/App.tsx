@@ -21,8 +21,27 @@ function App() {
     }, 300)
   }, [])
 
+  useEffect(() => {
+    const fetchActiveUser = async () => {
+      try {
+        if (activeUser?.id) {
+          const res = await fetch(`${backendUrl}/${activeUser?.id}.json`)
+          const data = await res.json()
+          setActiveUser(data)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchActiveUser()
+  }, [activeUser?.id])
+
   const handleUserClick = (user: IUser) => {
-    setActiveUser(user)
+    setActiveUser(null)
+    setTimeout(() => {
+      setActiveUser(user)
+    }, 0)
   }
 
   if (loading) {
